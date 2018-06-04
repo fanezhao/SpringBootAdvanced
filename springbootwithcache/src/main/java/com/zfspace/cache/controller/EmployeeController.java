@@ -23,4 +23,20 @@ public class EmployeeController {
         return employeeService.getEmpById(id);
     }
 
+    @GetMapping("/emp")
+    public Employee updateEmp(Employee employee) {
+        return employeeService.updateEmp(employee);
+    }
+
+    @GetMapping("/delemp/{id}")
+    public String deleteEmp(@PathVariable("id") Integer id) {
+        employeeService.deleteEmp(id);
+        return "success";
+    }
+
+    @GetMapping("/emp/lastname/{lastName}")
+    public Employee getEmpByLastName(@PathVariable("lastName") String lastName) {
+        return employeeService.getEmpByLastName(lastName);
+    }
+
 }

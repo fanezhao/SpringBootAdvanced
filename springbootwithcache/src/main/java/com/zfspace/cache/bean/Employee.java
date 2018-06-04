@@ -1,5 +1,8 @@
 package com.zfspace.cache.bean;
 
+import org.springframework.cache.annotation.CacheConfig;
+
+@CacheConfig(cacheNames = "emp") // 抽取缓存的公共配置
 public class Employee {
 
 	private Integer id;
