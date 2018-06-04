@@ -2,8 +2,10 @@ package com.zfspace.cache.bean;
 
 import org.springframework.cache.annotation.CacheConfig;
 
+import java.io.Serializable;
+
 @CacheConfig(cacheNames = "emp") // 抽取缓存的公共配置
-public class Employee {
+public class Employee implements Serializable {
 
 	private Integer id;
 	private String lastName;

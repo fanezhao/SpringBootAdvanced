@@ -4,6 +4,9 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+# 配置Redis：不同的位置host不一样
+  redis:
+    host: 192.168.2.107
 
 # 开启驼峰命名
 mybatis:
