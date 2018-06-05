@@ -3,9 +3,13 @@ package com.zfspace.cache.config;
 import com.zfspace.cache.bean.Employee;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 import java.net.UnknownHostException;
 
@@ -31,5 +35,32 @@ public class MyRedisConfig {
         Jackson2JsonRedisSerializer<Employee> serializer = new Jackson2JsonRedisSerializer<>(Employee.class);
         template.setDefaultSerializer(serializer);
         return template;
+    }
+
+    /**
+     * 序列化员工的
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Primary // 默认缓存管理器
+    @Bean
+    public RedisCacheManager empRedisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
+        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(Employee.class)));
+        RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(config);
+        return builder.build();
+    }
+
+    /**
+     * 序列化部门的
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean
+    public RedisCacheManager deptRedisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
+        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(Employee.class)));
+        RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(config);
+        return builder.build();
     }
 }

@@ -1,6 +1,8 @@
 package com.zfspace.cache.mapper;
 
+import com.zfspace.cache.bean.Department;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author ZF
@@ -9,4 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DepartmentMapper {
+
+    @Select("select * from department where id = #{id}")
+    Department getDeptById(Integer id);
 }

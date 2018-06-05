@@ -3,10 +3,7 @@ package com.zfspace.cache.service;
 import com.zfspace.cache.bean.Employee;
 import com.zfspace.cache.mapper.EmployerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @description
  * @date 2018-05-22 21:33
  */
+@CacheConfig(cacheNames = "emp", cacheManager = "empRedisCacheManager")
 @Service
 public class EmployeeService {
 
