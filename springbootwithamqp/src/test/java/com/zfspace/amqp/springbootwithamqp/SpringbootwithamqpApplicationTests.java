@@ -3,6 +3,10 @@ package com.zfspace.amqp.springbootwithamqp;
 import com.zfspace.amqp.bean.Book;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +22,21 @@ public class SpringbootwithamqpApplicationTests {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    AmqpAdmin amqpAdmin;
+
+    @Test
+    public void createExchange() {
+        // amqpAdmin.declareExchange(new DirectExchange("amqpAdmin.exchange"));
+        // System.out.println("创建完成");
+
+        // amqpAdmin.declareQueue(new Queue("amqpAdmin.queue"));
+
+        // 追寻绑定规则
+        amqpAdmin.declareBinding(new Binding("amqpAdmin.queue",
+                Binding.DestinationType.QUEUE, "amqpAdmin.exchange", "amqp.hello", null));
+    }
+
 
     /**
      * 发送消息（点对点）
