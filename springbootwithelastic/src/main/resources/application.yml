@@ -7,7 +7,11 @@ spring:
   profiles: home
   elasticsearch:
     jest:
-      uris: http://192.168.2.107:9200/
+      uris: http://192.168.1.119:9200/
+  data:
+      elasticsearch:
+        cluster-name: elasticsearch
+        cluster-nodes: 192.168.1.119:9300
 
 ---
 
