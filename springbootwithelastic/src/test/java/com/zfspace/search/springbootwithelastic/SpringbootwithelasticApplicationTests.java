@@ -1,6 +1,8 @@
 package com.zfspace.search.springbootwithelastic;
 
 import com.zfspace.search.bean.Article;
+import com.zfspace.search.bean.Book;
+import com.zfspace.search.repository.BookRepository;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -19,9 +21,23 @@ public class SpringbootwithelasticApplicationTests {
 
     @Autowired
     JestClient jestClient;
+    @Autowired
+    BookRepository bookRepository;
+
+    @Test
+    public void testRepo() {
+        // 索引一条文档
+        // Book book = new Book();
+        // book.setId(1);
+        // book.setAuthor("zhangsan");
+        // book.setName("《哈哈》");
+        // bookRepository.index(book);
+
+        System.out.println(bookRepository.findBooksByNameLike("哈"));
+    }
 
     /**
-     * 测试索引
+     * 测试索引 -- Jest
      */
     @Test
     public void contextLoads() {
@@ -43,7 +59,7 @@ public class SpringbootwithelasticApplicationTests {
     }
 
     /**
-     * 测试检索
+     * 测试检索 -- Jest
      */
     @Test
     public void search() {
